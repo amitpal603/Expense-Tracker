@@ -4,7 +4,7 @@ import ExpenseTable from './components/ExpenseTable'
 
 function App() {
   return (
-    <div >
+    <div className='flex justify-center  mt-8 gap-30 items-center md:flex' >
       <ExpenseForm></ExpenseForm>
       <ExpenseTable/>
     </div>
