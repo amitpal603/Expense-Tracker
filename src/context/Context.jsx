@@ -8,6 +8,7 @@ export const ExpenseStore = createContext()
     const [InputFormData,setInputFormData] = useState([])
     const {register,handleSubmit,reset} = useForm()
     const [select,setSelect] = useState("")
+    
 
     const handleInput = (data) => {
     setInputFormData([...InputFormData,data])
@@ -16,15 +17,17 @@ export const ExpenseStore = createContext()
       // filter in table to show data in option.
 
       const FilterDataOption = InputFormData.filter((expense) => {
-            if(expense.category.toLowerCase().includes(select) === 'All'.toLocaleLowerCase()){
-              return FilterDataOption
-            }
-      return  expense.category.toLowerCase().includes(select)
+        const searchTerm = select
+
+        if(searchTerm === "all"){
+          return InputFormData
+        }
+      return  expense.category.toLowerCase().includes(searchTerm)
       })
     // Total Amount logic
     const Total = FilterDataOption.reduce((Acu,Curr) => (Acu + Number(Curr.amount)),0 )
     const value = {
-        register,handleSubmit,handleInput,reset,InputFormData,Total,select,setSelect,FilterDataOption
+        register,handleSubmit,handleInput,reset,InputFormData,Total,select,setSelect,FilterDataOption,setInputFormData
     }
   return  <ExpenseStore.Provider value={value}>{children}</ExpenseStore.Provider>
 }
